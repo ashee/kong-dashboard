@@ -146,7 +146,7 @@ function start(argv) {
       terminal.error("This version of Kong dashboard doesn't support Kong v0.9 and lower.");
       process.exit(1);
     }
-    if (semver.gte(version, '0.12.0')) {
+    if (semver.gte(version, '0.13.0')) { // had to change from 0.12.0 to 0.13.0 to work with kong 0.12.1
       terminal.error("This version of Kong dashboard doesn't support Kong v0.11 and higher.");
       process.exit(1);
     }
@@ -155,7 +155,8 @@ function start(argv) {
     argv.kongVersion = version;
     var angularConfig = {
       kong_url: argv.kongUrl,
-      kong_version: argv.kongVersion,
+      // kong_version: argv.kongVersion,
+      kong_version: '0.11.2', // pretend we are on 0.11.x to prevent start-up failure
       kong_dashboard_version: require('../package.json').version,
       gelato_integration: argv.gelato
     };
